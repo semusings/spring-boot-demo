@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/payments")
+@RequestMapping("/api/payments")
 public interface PaymentCommand {
 
   @PostMapping("/{orderId}")

@@ -20,6 +20,7 @@ openfga:
 application:
   springdoc:
     title: Order API
+    version: 0.0.1
     description: Microservice-based order management system - Order API
     license:
       name: Apache 2.0

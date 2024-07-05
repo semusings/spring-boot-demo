@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/orders")
+@RequestMapping("/api/orders")
 public interface OrderQuery {
 
   static Map<String, Object> toOrderResponse(Order order) {

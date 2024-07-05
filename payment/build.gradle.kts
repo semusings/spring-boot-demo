@@ -24,6 +24,7 @@ dependencies {
     // Add OpenFGA Spring Boot Starter dependency to enable OpenFGA features
     // https://github.com/openfga/spring-boot-starter
     implementation("dev.openfga:openfga-spring-boot-starter:0.0.1")
+    implementation("com.nimbusds:nimbus-jose-jwt:9.40")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 

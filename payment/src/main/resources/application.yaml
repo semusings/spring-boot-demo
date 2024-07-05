@@ -9,10 +9,6 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-  security:
-    user:
-      name: semusings
-      password: semusings
 openfga:
   api-url: http://localhost:4000
   store-id: payment
@@ -20,6 +16,7 @@ openfga:
 application:
   springdoc:
     title: Payment API
+    version: 0.0.1
     description: Microservice-based order management system - Payment API
     license:
       name: Apache 2.0

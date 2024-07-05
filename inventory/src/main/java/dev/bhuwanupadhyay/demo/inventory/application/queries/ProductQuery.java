@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public interface ProductQuery {
 
   static Map<String, Object> toProductResponse(Product product) {
