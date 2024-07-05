@@ -1,0 +1,19 @@
+name: spring-boot-openfga-demo
+services:
+  openfga:
+    image: openfga/openfga:latest
+    command:
+      - "run"
+    # If you want to expose these ports outside your dev PC,
+    # remove the "127.0.0.1:" prefix
+    ports:
+      - "127.0.0.1:4000:4000"
+      - "127.0.0.1:3000:3000"
+    environment:
+      - OPENFGA_HTTP_ADDR=0.0.0.0:4000
+  openfgaimport:
+    image: openfga/cli:latest
+    restart: on-failure
+    command: "store create --name semusings --api-url http://openfga:4000 --model /tmp/openfgaimport/model.dsl"
+    volumes:
+      - ./openfga:/tmp/openfgaimport

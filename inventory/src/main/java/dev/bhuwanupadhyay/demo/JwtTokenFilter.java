@@ -50,11 +50,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
       return;
     }
 
-    String email = JwtTokenUtil.getUserEmailFromToken(token);
+    String userId = JwtTokenUtil.getUserIdFromToken(token);
 
     // Set user identity on the spring security context
     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-        email, null, Collections.emptyList());
+        userId, null, Collections.emptyList());
 
     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
@@ -68,6 +68,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
   }
 
   public static class JwtTokenUtil {
+
+    public static String getUserIdFromToken(String token) {
+      return getClaimObjectFromToken(token, JWTClaimsSet::getSubject);
+    }
 
     public static String getUserEmailFromToken(String token) {
       return getClaimFromToken(token, "email", String.class);

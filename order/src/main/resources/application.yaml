@@ -15,8 +15,8 @@ spring:
       password: semusings
 openfga:
   api-url: http://localhost:4000
-  store-id: order
-  authorization-model-id: order
+  store-id: semusings
+  authorization-model-id: 01J22B0PTANPXZ0V9H1XEM6P5M
 application:
   springdoc:
     title: Order API
@@ -28,6 +28,3 @@ application:
     external-doc:
       description: Github - Source Code
       url: "https://github.com/semusings/spring-boot-openfga-demo"
-logging:
-  level:
-    root: debug

@@ -8,3 +8,11 @@ services:
     extends:
       file: ./keycloak.yml
       service: keycloak
+  openfga:
+    extends:
+      file: ./openfga.yml
+      service: openfga
+  openfgaimport:
+    extends:
+      file: ./openfga.yml
+      service: openfgaimport

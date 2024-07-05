@@ -1,15 +1,17 @@
 package dev.bhuwanupadhyay.demo.order.model;
 
+import java.util.UUID;
+
 public interface OrderPermission {
 
   void assign(Permission permission);
 
-  record Permission(String orderId, String relation, String customerId) {
+  record Permission(UUID orderId, String relation, UUID customerId) {
 
     public static Permission asOwner(Order order) {
-      String orderId = order.getOrderId().S();
-      String customerId = order.getCustomerId().S();
-      return new Permission(orderId, "owner", customerId);
+
+      return new Permission(order.getOrderId().orderId(), "owner",
+          order.getCustomerId().customerId());
     }
 
   }

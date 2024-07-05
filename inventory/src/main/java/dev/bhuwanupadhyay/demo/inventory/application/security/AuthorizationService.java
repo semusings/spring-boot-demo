@@ -25,7 +25,7 @@ public class AuthorizationService implements ProductPermission {
       ClientTupleKey tuple = new ClientTupleKey() //
           .user("user:" + permission.customerId()) //
           .relation(permission.relation()) //
-          ._object("inventory:" + permission.product());
+          ._object("inventory:" + permission.productId());
 
       ClientWriteResponse response = fgaClient.writeTuples(List.of(tuple)).get();
 

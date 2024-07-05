@@ -1,16 +1,26 @@
 package dev.bhuwanupadhyay.demo.inventory.model;
 
+import java.util.UUID;
+
 public interface ProductPermission {
 
   void assign(Permission permission);
 
-  record Permission(String product, String relation, String customerId) {
+  record Permission(UUID productId, String relation, AnyId customerId) {
 
     public static Permission asOwner(Product product) {
-      String productId = product.getProductId().S();
-      return new Permission(productId, "owner", "*");
+      UUID productId = product.getProductId().productId();
+      return new Permission(productId, "owner", new AnyId());
     }
 
+  }
+
+  record AnyId() {
+
+    @Override
+    public String toString() {
+      return "";
+    }
   }
 }
 

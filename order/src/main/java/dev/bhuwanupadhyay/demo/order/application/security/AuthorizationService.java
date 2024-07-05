@@ -33,7 +33,7 @@ public class AuthorizationService implements OrderPermission {
       }
 
     } catch (FgaInvalidParameterException | InterruptedException | ExecutionException e) {
-      throw new AuthorizationException("Unexpected error", e);
+      throw new AuthorizationException(e.getMessage(), e);
     }
   }
 
