@@ -58,7 +58,7 @@ public class ApplicationConfiguration {
     //@formatter:on
     return http
         // Enable CORS and disable CSRF
-        .cors(Customizer.withDefaults()).csrf(Customizer.withDefaults())
+        .cors(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable)
         .httpBasic(AbstractHttpConfigurer::disable)
 
         // Set session management to stateless

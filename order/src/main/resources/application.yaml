@@ -28,3 +28,6 @@ application:
     external-doc:
       description: Github - Source Code
       url: "https://github.com/semusings/spring-boot-openfga-demo"
+logging:
+  level:
+    root: debug
