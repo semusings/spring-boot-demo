@@ -10,11 +10,11 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthorizationService implements OrderPermission {
+public class FgaPermissionService implements OrderPermission {
 
   private final OpenFgaClient fgaClient;
 
-  public AuthorizationService(OpenFgaClient fgaClient) {
+  public FgaPermissionService(OpenFgaClient fgaClient) {
     this.fgaClient = fgaClient;
   }
 
@@ -29,11 +29,11 @@ public class AuthorizationService implements OrderPermission {
       ClientWriteResponse response = fgaClient.writeTuples(List.of(tuple)).get();
 
       if (response.getStatusCode() >= 300) {
-        throw new AuthorizationException("Unable to write permission tuples");
+        throw new FgaPermissionException("Unable to write permission tuples");
       }
 
     } catch (FgaInvalidParameterException | InterruptedException | ExecutionException e) {
-      throw new AuthorizationException(e.getMessage(), e);
+      throw new FgaPermissionException(e.getMessage(), e);
     }
   }
 
