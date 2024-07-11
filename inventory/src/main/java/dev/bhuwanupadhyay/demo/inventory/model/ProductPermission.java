@@ -4,23 +4,21 @@ import java.util.UUID;
 
 public interface ProductPermission {
 
-  void assign(Permission permission);
+    void assign(Permission permission);
 
-  record Permission(UUID productId, String relation, AnyId customerId) {
+    record Permission(UUID productId, String relation, AnyId customerId) {
 
-    public static Permission asOwner(Product product) {
-      UUID productId = product.getProductId().productId();
-      return new Permission(productId, "owner", new AnyId());
+        public static Permission asOwner(Product product) {
+            UUID productId = product.getProductId().productId();
+            return new Permission(productId, "owner", new AnyId());
+        }
     }
 
-  }
+    record AnyId() {
 
-  record AnyId() {
-
-    @Override
-    public String toString() {
-      return "";
+        @Override
+        public String toString() {
+            return "";
+        }
     }
-  }
 }
-

@@ -3,3 +3,9 @@ repos:
     rev: v2.6.3
     hooks:
       - id: conventional-commits
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.13.0
+    hooks:
+      - id: pretty-format-java
+        args: [--autofix, --aosp, --google-java-formatter-version=1.22.0]
+        files: ^.*\.java$

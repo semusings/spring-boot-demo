@@ -7,27 +7,24 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "application")
 public class ApplicationProperties {
 
-  private Springdoc springdoc;
+    private Springdoc springdoc;
 
-  public Springdoc getSpringdoc() {
-    return springdoc;
-  }
+    public Springdoc getSpringdoc() {
+        return springdoc;
+    }
 
-  public void setSpringdoc(Springdoc springdoc) {
-    this.springdoc = springdoc;
-  }
+    public void setSpringdoc(Springdoc springdoc) {
+        this.springdoc = springdoc;
+    }
 
-  public record Springdoc(String title, String description, String version,
-                          SpringdocLicense license, SpringdocExternalDoc externalDoc) {
+    public record Springdoc(
+            String title,
+            String description,
+            String version,
+            SpringdocLicense license,
+            SpringdocExternalDoc externalDoc) {}
 
-  }
+    public record SpringdocLicense(String name, String url) {}
 
-  public record SpringdocLicense(String name, String url) {
-
-  }
-
-  public record SpringdocExternalDoc(String description, String url) {
-
-  }
-
+    public record SpringdocExternalDoc(String description, String url) {}
 }

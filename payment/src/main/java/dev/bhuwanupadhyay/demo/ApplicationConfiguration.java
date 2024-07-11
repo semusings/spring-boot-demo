@@ -4,9 +4,9 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.springdoc.core.properties.SpringDocConfigProperties;
 import org.springdoc.core.utils.Constants;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,99 +24,113 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @EnableConfigurationProperties
 public class ApplicationConfiguration {
 
-  @Bean
-  public OpenAPI applicationOpenAPI(ApplicationProperties properties) {
-    //@formatter:on
-    Info info = new Info()
-        .title(properties.getSpringdoc().title())
-        .description(properties.getSpringdoc().description())
-        .version(properties.getSpringdoc().version())
-        .license(
-            new License()
-                .name(properties.getSpringdoc().license().name())
-                .url(properties.getSpringdoc().license().url())
-        );
+    @Bean
+    public OpenAPI applicationOpenAPI(ApplicationProperties properties) {
 
-    ExternalDocumentation externalDocs = new ExternalDocumentation()
-        .description(properties.getSpringdoc().externalDoc().description())
-        .url(properties.getSpringdoc().externalDoc().url());
+        Info info =
+                new Info()
+                        .title(properties.getSpringdoc().title())
+                        .description(properties.getSpringdoc().description())
+                        .version(properties.getSpringdoc().version())
+                        .license(
+                                new License()
+                                        .name(properties.getSpringdoc().license().name())
+                                        .url(properties.getSpringdoc().license().url()));
 
-    return new OpenAPI().info(info).externalDocs(externalDocs);
-    //@formatter:off
-  }
+        ExternalDocumentation externalDocs =
+                new ExternalDocumentation()
+                        .description(properties.getSpringdoc().externalDoc().description())
+                        .url(properties.getSpringdoc().externalDoc().url());
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(
-      HttpSecurity http,
-      JwtTokenFilter jwtTokenFilter,
-      @Qualifier("ignoredRequestMatchers") RequestMatcher[] ignoredRequestMatchers
-  ) throws Exception {
-    //@formatter:on
-    return http
-        // Enable CORS and disable CSRF
-        .cors(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable)
-        .httpBasic(AbstractHttpConfigurer::disable)
+        return new OpenAPI().info(info).externalDocs(externalDocs);
+    }
 
-        // Set session management to stateless
-        .sessionManagement(configurer -> {
-          configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        })
+    @Bean
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            JwtTokenFilter jwtTokenFilter,
+            @Qualifier("ignoredRequestMatchers") RequestMatcher[] ignoredRequestMatchers)
+            throws Exception {
 
-        // Set unauthorized requests exception handler
-        .exceptionHandling(configurer -> {
-          configurer.authenticationEntryPoint((request, response, authException) -> {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-          });
-        })
+        return http
+                // Enable CORS and disable CSRF
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
 
-        // Set permissions on endpoints
-        .authorizeHttpRequests(registry -> {
-          registry
-              // Our public endpoints
-              .requestMatchers(ignoredRequestMatchers).permitAll()
-              // Our private endpoints
-              .requestMatchers("/api/**").authenticated()
-              // for role-based - registry.requestMatchers("/api/**").hasRole(Role.SYSTEM_ADMIN);
-              .anyRequest().authenticated();
-        })
+                // Set session management to stateless
+                .sessionManagement(
+                        configurer -> {
+                            configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                        })
 
-        // Add JWT token filter
-        .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                // Set unauthorized requests exception handler
+                .exceptionHandling(
+                        configurer -> {
+                            configurer.authenticationEntryPoint(
+                                    (request, response, authException) -> {
+                                        response.sendError(
+                                                HttpServletResponse.SC_UNAUTHORIZED,
+                                                authException.getMessage());
+                                    });
+                        })
 
-        // build
-        .build();
-    //@formatter:off
-  }
+                // Set permissions on endpoints
+                .authorizeHttpRequests(
+                        registry -> {
+                            registry
+                                    // Our public endpoints
+                                    .requestMatchers(ignoredRequestMatchers)
+                                    .permitAll()
+                                    // Our private endpoints
+                                    .requestMatchers("/api/**")
+                                    .authenticated()
+                                    // for role-based -
+                                    // registry.requestMatchers("/api/**").hasRole(Role.SYSTEM_ADMIN);
+                                    .anyRequest()
+                                    .authenticated();
+                        })
 
-  @Bean
-  public JwtTokenFilter jwtTokenFilter(@Qualifier("ignoredRequestMatchers") RequestMatcher[] ignoredRequestMatchers) {
-    return new JwtTokenFilter(ignoredRequestMatchers);
-  }
+                // Add JWT token filter
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
 
-  @Bean
-  @Qualifier("ignoredRequestMatchers")
-  public RequestMatcher[] ignoredRequestMatchers(
-      SpringDocConfigProperties springDocConfigProperties,
-      WebEndpointProperties webEndpointProperties) {
-    List<RequestMatcher> requestMatchers = new ArrayList<>();
+                // build
+                .build();
+    }
 
-    String swaggerUiPath = Constants.SWAGGER_UI_PREFIX + "/**";
-    requestMatchers.add(new AntPathRequestMatcher(swaggerUiPath));
+    @Bean
+    public JwtTokenFilter jwtTokenFilter(
+            @Qualifier("ignoredRequestMatchers") RequestMatcher[] ignoredRequestMatchers) {
+        return new JwtTokenFilter(ignoredRequestMatchers);
+    }
 
-    String swaggerUiHtmlPath = Constants.DEFAULT_SWAGGER_UI_PATH;
-    requestMatchers.add(new AntPathRequestMatcher(swaggerUiHtmlPath));
+    @Bean
+    @Qualifier("ignoredRequestMatchers")
+    public RequestMatcher[] ignoredRequestMatchers(
+            SpringDocConfigProperties springDocConfigProperties,
+            WebEndpointProperties webEndpointProperties) {
+        List<RequestMatcher> requestMatchers = new ArrayList<>();
 
-    String apiDocsPath = springDocConfigProperties.getApiDocs().getPath() + "/**";
-    requestMatchers.add(new AntPathRequestMatcher(apiDocsPath, HttpMethod.GET.name()));
+        String swaggerUiPath = Constants.SWAGGER_UI_PREFIX + "/**";
+        requestMatchers.add(new AntPathRequestMatcher(swaggerUiPath));
 
-    String managementEndpointsPath = webEndpointProperties.getBasePath() + "/**";
-    requestMatchers.add(new AntPathRequestMatcher(managementEndpointsPath, HttpMethod.GET.name()));
+        String swaggerUiHtmlPath = Constants.DEFAULT_SWAGGER_UI_PATH;
+        requestMatchers.add(new AntPathRequestMatcher(swaggerUiHtmlPath));
 
-    return requestMatchers.toArray(new RequestMatcher[0]);
-  }
+        String apiDocsPath = springDocConfigProperties.getApiDocs().getPath() + "/**";
+        requestMatchers.add(new AntPathRequestMatcher(apiDocsPath, HttpMethod.GET.name()));
 
+        String managementEndpointsPath = webEndpointProperties.getBasePath() + "/**";
+        requestMatchers.add(
+                new AntPathRequestMatcher(managementEndpointsPath, HttpMethod.GET.name()));
+
+        return requestMatchers.toArray(new RequestMatcher[0]);
+    }
 }
