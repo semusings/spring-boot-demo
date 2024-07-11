@@ -1,0 +1,36 @@
+### Create order
+POST http://localhost:3001/api/orders
+Authorization: Bearer {{$auth.token("bearer_token")}}
+
+> {%
+  client.global.set("order_id", response.body.orderId);
+%}
+
+### Get order
+GET http://localhost:3001/api/orders/{{order_id}}
+Authorization: Bearer {{$auth.token("bearer_token")}}
+
+### Get products
+GET http://localhost:3001/api/products
+Authorization: Bearer {{$auth.token("bearer_token")}}
+
+> {%
+  let records = response.body.records;
+  client.global.set("product_id", records[0].productId);
+%}
+
+### Add order item
+POST http://localhost:3001/api/orders/{{order_id}}/items
+Authorization: Bearer {{$auth.token("bearer_token")}}
+Content-Type: application/json
+
+{
+  "productId": "{{product_id}}",
+  "quantity": 5
+}
+
+### List orders
+GET http://localhost:3001/api/orders
+Authorization: Bearer {{$auth.token("bearer_token")}}
+
+
