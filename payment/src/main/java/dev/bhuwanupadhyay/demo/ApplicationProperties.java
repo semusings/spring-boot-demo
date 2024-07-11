@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationProperties {
 
     private Springdoc springdoc;
+    private Openfga openfga;
 
     public Springdoc getSpringdoc() {
         return springdoc;
@@ -16,6 +17,16 @@ public class ApplicationProperties {
     public void setSpringdoc(Springdoc springdoc) {
         this.springdoc = springdoc;
     }
+
+    public Openfga getOpenfga() {
+        return openfga;
+    }
+
+    public void setOpenfga(Openfga openfga) {
+        this.openfga = openfga;
+    }
+
+    public record Openfga(String storeName) {}
 
     public record Springdoc(
             String title,

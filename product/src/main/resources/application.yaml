@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8083
 spring:
   jpa:
     hibernate:
@@ -18,9 +18,9 @@ openfga:
   store-name: semusings
 application:
   springdoc:
-    title: Order API
+    title: Product API
     version: 0.0.1
-    description: Microservice-based order management system - Order API
+    description: Microservice-based order management system - Product API
     license:
       name: Apache 2.0
       url: https://www.apache.org/licenses/LICENSE-2.0

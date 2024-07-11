@@ -1,0 +1,28 @@
+### Create product
+POST http://localhost:3001/api/products
+Authorization: Bearer {{$auth.token("bearer_token")}}
+Content-Type: application/json
+
+{
+  "name": "Product Name",
+  "description": "Product Description",
+  "retailPrice": 900.50,
+  "initialQuantity": 10
+}
+
+### Get product
+GET http://localhost:3001/api/products/{{product_id}}
+Authorization: Bearer {{$auth.token("bearer_token")}}
+
+### Update product stock
+GET http://localhost:3001/api/products/{{product_id}}/update-stock
+Authorization: Bearer {{$auth.token("bearer_token")}}
+Content-Type: application/json
+
+{
+  "quantity": 100
+}
+
+### Get products
+GET http://localhost:3001/api/products
+Authorization: Bearer {{$auth.token("bearer_token")}}
