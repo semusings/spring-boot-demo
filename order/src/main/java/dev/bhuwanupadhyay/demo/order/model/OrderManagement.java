@@ -34,7 +34,7 @@ public class OrderManagement {
     return order;
   }
 
-  @PreAuthorize("@fga.check('order', #orderId, 'update_item', 'user')")
+  @PreAuthorize("@fga.check('order', #orderId, 'owner', 'customer')")
   public Order addItem(@P("orderId") OrderId orderId, ProductId productId, Integer quantity) {
     Order order = this.orders.getByOrderId(orderId);
     LineItem lineItem = new LineItem(orderId);
@@ -43,7 +43,7 @@ public class OrderManagement {
     return this.orders.save(order);
   }
 
-  @PreAuthorize("@fga.check('order', #orderId, 'update_item', 'user')")
+  @PreAuthorize("@fga.check('order', #orderId, 'owner', 'customer')")
   public Order updateItem(@P("orderId") OrderId orderId, LineItemId lineItemId, ProductId productId,
       Integer quantity) {
     Order order = this.orders.getByOrderId(orderId);
@@ -53,14 +53,14 @@ public class OrderManagement {
     return this.orders.save(order);
   }
 
-  @PreAuthorize("@fga.check('order', #orderId, 'complete', 'user')")
+  @PreAuthorize("@fga.check('order', #orderId, 'owner', 'customer')")
   public Order complete(@P("orderId") OrderId orderId) {
     Order order = this.orders.getByOrderId(orderId);
     order.complete();
     return this.orders.save(order);
   }
 
-  @PreAuthorize("@fga.check('order', #orderId, 'cancel', 'user')")
+  @PreAuthorize("@fga.check('order', #orderId, 'owner', 'user')")
   public Order cancel(@P("orderId") OrderId orderId) {
     Order order = this.orders.getByOrderId(orderId);
     order.cancel();

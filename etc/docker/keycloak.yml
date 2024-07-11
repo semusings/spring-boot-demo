@@ -4,8 +4,8 @@ services:
     image: quay.io/keycloak/keycloak:25.0.1
     command: 'start-dev --import-realm'
     volumes:
-      - ./realm-config:/opt/keycloak/data/import
-      - ./realm-config/keycloak-health-check.sh:/opt/keycloak/health-check.sh
+      - ./keycloak/realm.json:/opt/keycloak/data/import/realm.json
+      - ./keycloak/keycloak-health-check.sh:/opt/keycloak/health-check.sh
     environment:
       - KC_DB=dev-file
       - KEYCLOAK_ADMIN=admin

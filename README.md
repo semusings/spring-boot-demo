@@ -47,3 +47,8 @@ As we add more services and users, managing who can do what gets complicated. Th
 ---
 
 ## OpenFGA : Spring Boot Demo
+
+
+## References
+
+- https://openfga.dev/docs/modeling/roles-and-permissions

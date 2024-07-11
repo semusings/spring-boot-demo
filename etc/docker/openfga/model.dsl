@@ -1,11 +1,15 @@
 model
   schema 1.1
-type group
-  relations
-    define assignee: [user]
-type role
-  relations
-    define assignee: [user] or assignee from parent or assignee from parent_group
-    define parent: [role]
-    define parent_group: [group]
+
+type customer
 type user
+
+type order
+  relations
+    define owner: [customer]
+    define viewer: [user, customer]
+
+type payment
+  relations
+    define owner: [customer]
+    define viewer: [user, customer]

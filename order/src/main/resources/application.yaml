@@ -15,8 +15,8 @@ spring:
       password: semusings
 openfga:
   api-url: http://localhost:4000
-  store-id: semusings
-  authorization-model-id: 01J22B0PTANPXZ0V9H1XEM6P5M
+  store-id: 01J2GX9GCZHD05QDFAPDKY2P68
+  authorization-model-id: 01J2GX9GD3DD5WSDEAJG28CZFJ
 application:
   springdoc:
     title: Order API

@@ -31,18 +31,14 @@ public class ApplicationConfiguration {
   @Bean
   public OpenAPI applicationOpenAPI(ApplicationProperties properties) {
     //@formatter:on
-    Info info = new Info()
-        .title(properties.getSpringdoc().title())
+    Info info = new Info().title(properties.getSpringdoc().title())
         .description(properties.getSpringdoc().description())
-        .version(properties.getSpringdoc().version())
-        .license(
-            new License()
-                .name(properties.getSpringdoc().license().name())
-                .url(properties.getSpringdoc().license().url())
-        );
+        .version(properties.getSpringdoc().version()).license(
+            new License().name(properties.getSpringdoc().license().name())
+                .url(properties.getSpringdoc().license().url()));
 
-    ExternalDocumentation externalDocs = new ExternalDocumentation()
-        .description(properties.getSpringdoc().externalDoc().description())
+    ExternalDocumentation externalDocs = new ExternalDocumentation().description(
+            properties.getSpringdoc().externalDoc().description())
         .url(properties.getSpringdoc().externalDoc().url());
 
     return new OpenAPI().info(info).externalDocs(externalDocs);
