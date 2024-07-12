@@ -45,3 +45,5 @@ yarn.lock
 index.html
 README.html
 public/
+cypress/e2e/generated
+openapitools.json

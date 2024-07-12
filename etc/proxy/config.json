@@ -1,14 +1,14 @@
 [
   {
-    "path": "/api/orders",
+    "path": "/api/products",
     "target": "http://localhost:8081"
   },
   {
-    "path": "/api/payments",
+    "path": "/api/orders",
     "target": "http://localhost:8082"
   },
   {
-    "path": "/api/products",
+    "path": "/api/payments",
     "target": "http://localhost:8083"
   }
 ]
