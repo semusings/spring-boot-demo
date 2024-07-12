@@ -1,5 +1,5 @@
 ### Create order
-POST http://localhost:3001/api/orders
+POST http://localhost:8080/api/orders
 Authorization: Bearer {{$auth.token("bearer_token")}}
 
 > {%
@@ -7,11 +7,11 @@ Authorization: Bearer {{$auth.token("bearer_token")}}
 %}
 
 ### Get order
-GET http://localhost:3001/api/orders/{{order_id}}
+GET http://localhost:8080/api/orders/{{order_id}}
 Authorization: Bearer {{$auth.token("bearer_token")}}
 
 ### Get products
-GET http://localhost:3001/api/products
+GET http://localhost:8080/api/products
 Authorization: Bearer {{$auth.token("bearer_token")}}
 
 > {%
@@ -20,7 +20,7 @@ Authorization: Bearer {{$auth.token("bearer_token")}}
 %}
 
 ### Add order item
-POST http://localhost:3001/api/orders/{{order_id}}/items
+POST http://localhost:8080/api/orders/{{order_id}}/items
 Authorization: Bearer {{$auth.token("bearer_token")}}
 Content-Type: application/json
 
@@ -30,7 +30,7 @@ Content-Type: application/json
 }
 
 ### List orders
-GET http://localhost:3001/api/orders
+GET http://localhost:8080/api/orders
 Authorization: Bearer {{$auth.token("bearer_token")}}
 
 

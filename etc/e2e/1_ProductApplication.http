@@ -1,5 +1,5 @@
 ### Create product
-POST http://localhost:3001/api/products
+POST http://localhost:8080/api/products
 Authorization: Bearer {{$auth.token("bearer_token")}}
 Content-Type: application/json
 
@@ -15,11 +15,11 @@ Content-Type: application/json
 %}
 
 ### Get product
-GET http://localhost:3001/api/products/{{product_id}}
+GET http://localhost:8080/api/products/{{product_id}}
 Authorization: Bearer {{$auth.token("bearer_token")}}
 
 ### Update product stock
-POST http://localhost:3001/api/products/{{product_id}}/update-stock
+POST http://localhost:8080/api/products/{{product_id}}/update-stock
 Authorization: Bearer {{$auth.token("bearer_token")}}
 Content-Type: application/json
 
@@ -28,5 +28,5 @@ Content-Type: application/json
 }
 
 ### Get products
-GET http://localhost:3001/api/products
+GET http://localhost:8080/api/products
 Authorization: Bearer {{$auth.token("bearer_token")}}

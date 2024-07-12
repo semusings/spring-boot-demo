@@ -19,6 +19,6 @@ obj.forEach(e => {
   ));
 })
 
-app.listen(3001);
+app.listen(8080);
 
-console.log('[PROXY] Server: listening on port 3001');
+console.log('[PROXY] Server: listening on port 8080');
