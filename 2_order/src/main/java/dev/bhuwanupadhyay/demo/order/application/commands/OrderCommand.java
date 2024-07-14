@@ -14,7 +14,7 @@ public interface OrderCommand {
     OrderResponse createOrder();
 
     @PostMapping("/{orderId}/items")
-    OrderResponse addItem(@PathVariable String orderId, ItemRequest request);
+    OrderResponse addItem(@PathVariable String orderId, @RequestBody ItemRequest request);
 
     @PostMapping("/{orderId}/items/{lineItemId}")
     OrderResponse updateItem(

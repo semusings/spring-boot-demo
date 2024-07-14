@@ -11,7 +11,7 @@
     "openapi:payment": "openapi-generator-cli generate -g typescript -i http://localhost:8082/v3/api-docs -o ./node_modules/@semusings/payment --additional-properties=npmName=@semusings/payment,supportsES6=true,npmVersion=v1.0.0,withInterfaces=true",
     "openapi:generator": "run-s openapi:clean openapi:product openapi:order openapi:payment",
     "test": "jest",
-    "cy:open": "cypress open --e2e --browser chrome",
+    "cy:open": "cypress open --e2e --browser edge",
     "build": "tsc",
     "lint": "tsc --project tsconfig.lint.json",
     "lint:cypress": "tsc --project cypress/tsconfig.json"
@@ -27,7 +27,7 @@
     "@types/jest": "^29.5.12",
     "@types/mocha": "^10.0.6",
     "cypress": "^13.10.0",
-    "cypress-keycloak": "^2.0.1",
+    "cypress-keycloak-commands": "^1.2.0",
     "express": "^4.17.1",
     "http-proxy-middleware": "^2.0.1",
     "jest": "^29.7.0",

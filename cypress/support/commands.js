@@ -23,7 +23,7 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-import 'cypress-keycloak';
+import "cypress-keycloak-commands";
 
 Cypress.on('uncaught:exception', (err, origin) => {
   // Handle the error here
@@ -31,14 +31,3 @@ Cypress.on('uncaught:exception', (err, origin) => {
   console.error(err);
   return false;
 });
-
-Cypress.Commands.overwrite('login', (originalFn) => {
-  originalFn({
-    root: 'http://localhost:9080',
-    realm: 'semusings',
-    username: 'user',
-    password: 'user',
-    client_id: 'web_app',
-    redirect_uri: 'http://localhost:8080',
-  })
-})
