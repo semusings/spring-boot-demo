@@ -26,4 +26,4 @@ application:
       url: https://www.apache.org/licenses/LICENSE-2.0
     external-doc:
       description: Github - Source Code
-      url: "https://github.com/semusings/spring-boot-openfga-demo"
+      url: "https://github.com/semusings/spring-boot-demo"

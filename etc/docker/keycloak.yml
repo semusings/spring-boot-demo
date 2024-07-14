@@ -1,4 +1,4 @@
-name: spring-boot-openfga-demo
+name: spring-boot-demo
 services:
   keycloak:
     image: quay.io/keycloak/keycloak:25.0.1

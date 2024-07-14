@@ -1,4 +1,4 @@
-name: spring-boot-openfga-demo
+name: spring-boot-demo
 services:
   openfga:
     image: openfga/openfga:latest

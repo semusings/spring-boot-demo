@@ -1,4 +1,4 @@
-rootProject.name = "spring-boot-openfga-demo"
+rootProject.name = "spring-boot-demo"
 
 include(":1_product")
 include(":2_order")

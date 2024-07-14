@@ -1,4 +1,4 @@
-name: spring-boot-openfga-demo
+name: spring-boot-demo
 services:
   postgresql:
     image: postgres:16.3
